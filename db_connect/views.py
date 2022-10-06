@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+
 def index(request):
     # Получение всех записей
     books = Books.objects.all()
@@ -29,6 +30,7 @@ def index(request):
 
 
 def create(request):  # Создание
+
     if request.method == "GET":
         return render(request, "create.html")
     book = Books()

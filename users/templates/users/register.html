@@ -11,16 +11,21 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Добро пожаловать</legend>
+                <legend class="border-bottom mb-4">Welcome</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Регистрация</button>
+                <button class="btn btn-outline-info" type="submit">Registration</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Уже есть аккаунт? <a class="ml-2" href="#">Вход</a>
+                Already have account? <a class="ml-2" href="#">Login</a>
+            </small>
+        </div>
+        <div>
+            <small class="text-muted">
+                <a class="ml-2" href="/">Back to main</a>
             </small>
         </div>
     </div>
