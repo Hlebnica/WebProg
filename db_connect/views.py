@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Books
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def index(request):
@@ -29,8 +29,8 @@ def index(request):
     return render(request, "index.html", context=data)
 
 
+@login_required
 def create(request):  # Создание
-
     if request.method == "GET":
         return render(request, "create.html")
     book = Books()
@@ -41,6 +41,7 @@ def create(request):  # Создание
     return HttpResponseRedirect("/")
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def edit(request, id):  # Обновление по id
     try:
         book = Books.objects.get(id=id)
@@ -57,6 +58,7 @@ def edit(request, id):  # Обновление по id
         return HttpResponseNotFound("<h2>Book not found</h2>")
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def delete(request, id):  # Удаление по id
     try:
         book = Books.objects.get(id=id)
